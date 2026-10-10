@@ -1,4 +1,4 @@
-#include "ui/app_icon.h"
+#include "ui/app_icon/app_icon.h"
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 

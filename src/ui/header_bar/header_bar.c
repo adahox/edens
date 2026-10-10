@@ -1,4 +1,5 @@
 #include <gtk/gtk.h>
+#include "ui/header_bar/header_bar.h"
 
 GtkWidget *create_header_bar(void)
 {

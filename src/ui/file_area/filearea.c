@@ -1,10 +1,12 @@
 #include <gtk/gtk.h>
-#include "filearea.h"
-#include "fileitem.h"
+#include "ui/file_area/filearea.h"
+#include "ui/file_item/fileitem.h"
 
 GtkWidget *build_file_area(void)
 {
     GtkWidget *file_area = gtk_flow_box_new();
+
+    gtk_widget_set_name(file_area, "file-area");
 
     gtk_flow_box_set_row_spacing(
         GTK_FLOW_BOX(file_area),

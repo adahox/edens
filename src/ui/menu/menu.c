@@ -1,5 +1,5 @@
-#include "menu.h"
-#include "menu_actions.h"
+#include "ui/menu/menu.h"
+#include "ui/menu_actions/menu_actions.h"
 
 typedef struct MenuAction {
     char *label;

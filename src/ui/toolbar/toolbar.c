@@ -1,15 +1,15 @@
 #include <gtk/gtk.h>
-#include "toolbar.h"
-#include "ui/icons.h"
+#include "ui/toolbar/toolbar.h"
+#include "ui/icons/icons.h"
 
 GtkWidget *build_toolbar(void)
 {
     GtkWidget *toolbar = gtk_box_new(
         GTK_ORIENTATION_HORIZONTAL,
-        3
+        5
     );
 
-    gtk_widget_set_name(toolbar, "explorer-toolbar");
+    gtk_widget_set_name(toolbar, "toolbar");
 
     // botões de navegação
     GtkWidget *backButton = edens_icon_button_new(
@@ -21,8 +21,8 @@ GtkWidget *build_toolbar(void)
         EDENS_ICON_GO_NEXT_FALLBACK
     );
 
-    gtk_box_pack_start(GTK_BOX(toolbar),backButton,FALSE,FALSE,0);
-    gtk_box_pack_start(GTK_BOX(toolbar),forwardButton,FALSE,FALSE,0);
+   gtk_box_pack_start(GTK_BOX(toolbar),backButton,FALSE,FALSE,0);
+   gtk_box_pack_start(GTK_BOX(toolbar),forwardButton,FALSE,FALSE,0);
 
 
     GtkWidget *pathEntry = gtk_entry_new();
@@ -38,5 +38,6 @@ GtkWidget *build_toolbar(void)
     gtk_widget_set_tooltip_text(btn_hidden, "Mostrar/Ocultar arquivos ocultos (Ctrl+H)");
 
     gtk_box_pack_start(GTK_BOX(toolbar),btn_hidden,FALSE,FALSE,0);
+    
     return toolbar;
 }

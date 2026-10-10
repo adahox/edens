@@ -1,9 +1,8 @@
 #include <gtk/gtk.h>
-#include "header_bar.c"
-#include "window.h"
-#include "menu.h"
-#include "ui/theme.h"
-#include "ui/app_icon.h"
+#include "ui/window/window.h"
+#include "ui/header_bar/header_bar.h"
+#include "ui/menu/menu.h"
+#include "ui/app_icon/app_icon.h"
 
 static void on_window_realize(GtkWidget *window, gpointer user_data)
 {
@@ -25,7 +24,6 @@ GtkWidget *build_window(GtkApplication *app)
     GtkWidget *window = gtk_application_window_new(app);
     set_window_properties(window);
 
-
     GtkWidget *header_bar = create_header_bar();
     gtk_window_set_titlebar(GTK_WINDOW(window), header_bar);
 
@@ -34,10 +32,8 @@ GtkWidget *build_window(GtkApplication *app)
     GMenu *menu = create_menu();
     gtk_application_set_menubar(GTK_APPLICATION(app), G_MENU_MODEL(menu));
     g_object_unref(menu);
-    
-    gtk_application_window_set_show_menubar(GTK_APPLICATION_WINDOW(window), TRUE);
 
-    edens_apply_theme(window);
+    gtk_application_window_set_show_menubar(GTK_APPLICATION_WINDOW(window), TRUE);
 
     return window;
 }

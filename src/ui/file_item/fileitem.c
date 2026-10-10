@@ -1,5 +1,5 @@
 #include <gtk/gtk.h>
-#include "fileitem.h"
+#include "ui/file_item/fileitem.h"
 
 enum { FILE_ICON_SIZE = 64 };
 
@@ -18,8 +18,39 @@ static int label_width_chars(GtkWidget *label)
     return FILE_ICON_SIZE / char_width;
 }
 
+static gboolean file_item_pointer_crossing(
+    GtkWidget *widget,
+    GdkEventCrossing *event,
+    gpointer user_data)
+{
+    (void)event;
+    gboolean entering = GPOINTER_TO_INT(user_data) != 0;
+
+    if (entering) {
+        gtk_widget_set_state_flags(widget, GTK_STATE_FLAG_PRELIGHT, FALSE);
+    } else {
+        gtk_widget_unset_state_flags(widget, GTK_STATE_FLAG_PRELIGHT);
+    }
+
+    return GDK_EVENT_PROPAGATE;
+}
+
+static gboolean file_item_button_press(
+    GtkWidget *widget,
+    GdkEventButton *event,
+    gpointer user_data)
+{
+    (void)event;
+    (void)user_data;
+
+    printf("button press: %s\n", (char *)user_data);
+}
+
 GtkWidget *build_file_item(EdensDirectoryEntry *entry)
 {
+    GtkWidget *shell = gtk_event_box_new();
+    gtk_widget_set_name(shell, "file-item");
+
     GtkWidget *item = gtk_box_new(
         GTK_ORIENTATION_VERTICAL,
         0
@@ -44,7 +75,7 @@ GtkWidget *build_file_item(EdensDirectoryEntry *entry)
     GtkWidget *file_label = gtk_label_new(entry->name);
 
     gtk_widget_set_name(file_label, "file-item-label");
-    
+
     int width_chars = label_width_chars(file_label);
 
     gtk_label_set_max_width_chars(GTK_LABEL(file_label), width_chars);
@@ -67,7 +98,32 @@ GtkWidget *build_file_item(EdensDirectoryEntry *entry)
         FALSE,
         0
     );
-    
 
-    return item;
+    gtk_container_add(GTK_CONTAINER(shell), item);
+
+    gtk_widget_add_events(
+        shell,
+        GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK
+    );
+    g_signal_connect(
+        shell,
+        "enter-notify-event",
+        G_CALLBACK(file_item_pointer_crossing),
+        GINT_TO_POINTER(1)
+    );
+    g_signal_connect(
+        shell,
+        "leave-notify-event",
+        G_CALLBACK(file_item_pointer_crossing),
+        GINT_TO_POINTER(0)
+    );
+
+    g_signal_connect(
+        shell,
+        "button-press-event",
+        G_CALLBACK(file_item_button_press),
+        g_strdup(gtk_widget_get_name(shell))
+    );
+
+    return shell;
 }

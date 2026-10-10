@@ -5,12 +5,13 @@
 #include "processors/directories.h"
 
 #include "ui/window/window.h"
-#include "ui/mainbox.h"
-#include "ui/toolbar.h"
-#include "ui/actionBar.h"
-#include "ui/filearea.h"
-#include "ui/scrolledwindow.h"
-#include "ui/app_icon.h"
+#include "ui/main_box/mainbox.h"
+#include "ui/toolbar/toolbar.h"
+#include "ui/action_bar/actionBar.h"
+#include "ui/file_area/filearea.h"
+#include "ui/scrolled_window/scrolledwindow.h"
+#include "ui/app_icon/app_icon.h"
+#include "ui/theme/theme.h"
 
 
 static void activate(GtkApplication *app, gpointer user_data)
@@ -25,6 +26,8 @@ static void activate(GtkApplication *app, gpointer user_data)
     GtkWidget *file_area = build_file_area();
     GtkWidget *scrolled_window = build_scrolled_window();
     GtkWidget *actionBar = build_action_bar();
+
+
 
     gtk_container_add(
         GTK_CONTAINER(scrolled_window),
@@ -69,6 +72,7 @@ static void activate(GtkApplication *app, gpointer user_data)
         );
 
         gtk_widget_show_all(window);
+        edens_apply_theme(window);
         return;
     }
 
@@ -76,6 +80,7 @@ static void activate(GtkApplication *app, gpointer user_data)
     free_directory_entries(&entries);
 
     gtk_widget_show_all(window);
+    edens_apply_theme(window);
 }
 
 int main(int argc, char *argv[])

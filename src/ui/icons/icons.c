@@ -1,4 +1,4 @@
-#include "icons.h"
+#include "ui/icons/icons.h"
 
 static const char *pick_icon_name(const char *primary, const char *fallback)
 {

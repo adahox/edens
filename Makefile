@@ -8,17 +8,18 @@ SRC = \
     src/main.c \
     src/processors/directories.c \
     src/ui/window/window.c \
-    src/ui/mainbox.c \
-    src/ui/toolbar.c \
-    src/ui/filearea.c \
-    src/ui/scrolledwindow.c \
-    src/ui/fileitem.c \
-    src/ui/window/menu.c \
-    src/ui/window/menu_actions.c \
-    src/ui/actionBar.c \
-    src/ui/theme.c \
-	src/ui/icons.c \
-	src/ui/app_icon.c
+    src/ui/header_bar/header_bar.c \
+    src/ui/main_box/mainbox.c \
+    src/ui/toolbar/toolbar.c \
+    src/ui/file_area/filearea.c \
+    src/ui/scrolled_window/scrolledwindow.c \
+    src/ui/file_item/fileitem.c \
+    src/ui/menu/menu.c \
+    src/ui/menu_actions/menu_actions.c \
+    src/ui/action_bar/actionBar.c \
+    src/ui/theme/theme.c \
+    src/ui/icons/icons.c \
+    src/ui/app_icon/app_icon.c
 
 ICON_PNG = data/icons/icon-task-manager.png
 ICON_SVG = data/icons/icon-task-manager.svg
@@ -32,9 +33,9 @@ BIN = edens
 all: $(BIN) compile_commands.json
 
 $(ICON_PNG): $(ICON_SVG)
-	convert -background none $< -type TrueColorAlpha PNG32:$@
+	rsvg-convert -w 512 -h 512 $< -o $@
 
-resources.c: gresources.xml $(ICON_PNG)
+resources.c: gresources.xml $(ICON_PNG) data/edens.css
 	glib-compile-resources gresources.xml --generate-source --target=$@
 
 $(BUILD)/resources.o: resources.c

@@ -7,7 +7,7 @@ A small GTK 3 file-manager learning project written in C.
 On Debian/Ubuntu/Linux Mint:
 
 ```bash
-sudo apt install build-essential pkg-config libgtk-3-dev adwaita-icon-theme imagemagick
+sudo apt install build-essential pkg-config libgtk-3-dev adwaita-icon-theme librsvg2-bin
 ```
 
 Toolbar icons use the system icon theme (symbolic names such as `go-previous-symbolic`). On Ubuntu, Yaru/Adwaita is usually enough; if icons are missing, install `yaru-theme-icon` or set `EDENS_DATA_DIR` when running from outside the project tree (must contain `edens.css`).
@@ -23,6 +23,8 @@ make
 ```bash
 make run
 ```
+
+Run from the **project root** so `data/edens.css` is found. On startup the terminal prints `edens: tema CSS ativo — fonte: ...`. If the window background turns **magenta**, the CSS file was not loaded or has a parse error (see the message above it in the terminal).
 
 ## Taskbar / dock icon (Ubuntu GNOME, etc.)
 

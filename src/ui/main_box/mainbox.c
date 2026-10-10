@@ -1,5 +1,5 @@
 #include <gtk/gtk.h>
-#include "mainbox.h"
+#include "ui/main_box/mainbox.h"
 
 GtkWidget *build_main_box(void)
 {
@@ -8,7 +8,7 @@ GtkWidget *build_main_box(void)
         0
     );
 
-    gtk_widget_set_name(main_box, "main-box");
+    gtk_widget_set_name(main_box, "main_box");
 
     return main_box;
 }
