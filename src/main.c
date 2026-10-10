@@ -10,11 +10,14 @@
 #include "ui/actionBar.h"
 #include "ui/filearea.h"
 #include "ui/scrolledwindow.h"
+#include "ui/app_icon.h"
 
 
 static void activate(GtkApplication *app, gpointer user_data)
 {
     (void)user_data;
+
+    edens_setup_application_icon(app);
 
     GtkWidget *window = build_window(app);
     GtkWidget *main_box = build_main_box();

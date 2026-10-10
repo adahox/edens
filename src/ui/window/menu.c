@@ -15,7 +15,7 @@ static MenuAction file_menu[] = {
     {"Novo", "document-new", "new", "app.new", menu_action_new, "<Control>n", NULL},
     {"Abrir", "document-open", "open", "app.open", menu_action_open, "<Control>o", NULL},
     {"Salvar", "document-save", "save", "app.save", menu_action_save, "<Control>s", NULL},
-    {"Salvar Como", "document-save-as", "save-as", "app.save-as", menu_action_save_as, "<Control>Shift+S", NULL},
+    {"Salvar Como", "document-save-as", "save-as", "app.save-as", menu_action_save_as, "<Control><Shift>s", NULL},
     {"Fechar",   "window-close", "close", "app.close", menu_action_close, "<Control>w", NULL},
     {NULL,  NULL, NULL, NULL, NULL, NULL, NULL},
 };

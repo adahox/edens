@@ -1,0 +1,116 @@
+headerbar {
+    background-color: #2E2D2D;
+    background-image: none;
+    color: #ffffff;
+    border-width: 1px;
+    border-color: rgb(65, 66, 71);
+    box-shadow: none;
+ }
+ 
+ #explorer-toolbar {
+    background-color: #2E2D2D;
+    background-image: none;
+    color: #ffffff;
+    border-width: 1px;
+    border-color: rgb(65, 66, 71);
+    box-shadow: none;
+    margin: 0;
+    padding: 4px 6px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+ }
+ 
+ #explorer-toolbar button {
+    background-color: rgb(65, 66, 71);
+    background-image: none;
+    border-width: 0;
+    box-shadow: none;
+    padding: 4px;
+    color: #ffffff;
+ }
+
+ #explorer-toolbar button image {
+    color: #ffffff;
+    -gtk-icon-shadow: none;
+ }
+
+ #explorer-toolbar button:hover {
+    background-color: rgba(65, 66, 71, 0.55);
+ }
+
+ #explorer-toolbar button:hover image,
+ #explorer-toolbar button:active image {
+    color: #ffffff;
+ }
+
+ headerbar:backdrop #explorer-toolbar button,
+ headerbar:backdrop #explorer-toolbar button image,
+ window:backdrop #explorer-toolbar button,
+ window:backdrop #explorer-toolbar button image {
+    color: #ffffff;
+ }
+ 
+ #scrolledwindow {
+    background-color: rgb(65, 66, 71);
+    border-width: 0;
+ }
+ 
+ #explorer-toolbar entry {
+    background-color: rgb(65, 66, 71);
+    background-image: none;
+    border-width: 0;
+    box-shadow: none;
+    padding: 4px;
+    color: #ffffff;
+ }
+ 
+ #file-item-label {
+    color: #ffffff;
+ }
+ 
+ #action-bar {
+    background-color: #252630;
+    color: #ffffff;
+    min-height: 32px;
+ }
+ 
+ #main-box {
+    background-color: rgb(65, 66, 71);
+    border-width: 0;
+ }
+ 
+ headerbar, titlebar {
+    box-shadow: none;
+    border-width: 1px;
+    border-color: rgb(65, 66, 71);
+ }
+ 
+ /* Estilo da Barra de Menu Principal (MenuBar Superior) */
+ menubar {
+    background-color: #2E2D2D;
+    color: #ffffff;
+    border-width: 1px;
+    border-color: rgb(65, 66, 71);
+    box-shadow: none;
+ }
+ 
+ menubar > menuitem {
+    color: #ffffff;
+ }
+ 
+ menubar > menuitem:hover {
+    background-color: #3e4059;
+ }
+ 
+ /* Estilo dos Popups / Submenus */
+ popovercontents, popover, menu {
+    background-color: #252630;
+    color: #ffffff;
+    border: 1px solid #3b3d52;
+ }
+ 
+ /* Destaque ao passar o rato nos itens */
+ popover modelbutton:hover, menuitem:hover {
+    background-color: #3e4059;
+    color: #ffffff;
+ }

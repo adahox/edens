@@ -5,24 +5,41 @@ LDFLAGS = $(shell pkg-config --libs $(PKG))
 
 BUILD = build
 SRC = \
-	src/main.c \
-	src/processors/directories.c \
-	src/ui/window/window.c \
-	src/ui/mainbox.c \
-	src/ui/toolbar.c \
-	src/ui/filearea.c \
-	src/ui/scrolledwindow.c \
-	src/ui/fileitem.c \
-	src/ui/window/menu.c \
-	src/ui/window/menu_actions.c \
-	src/ui/actionBar.c
+    src/main.c \
+    src/processors/directories.c \
+    src/ui/window/window.c \
+    src/ui/mainbox.c \
+    src/ui/toolbar.c \
+    src/ui/filearea.c \
+    src/ui/scrolledwindow.c \
+    src/ui/fileitem.c \
+    src/ui/window/menu.c \
+    src/ui/window/menu_actions.c \
+    src/ui/actionBar.c \
+    src/ui/theme.c \
+	src/ui/icons.c \
+	src/ui/app_icon.c
 
-OBJ = $(patsubst src/%.c,$(BUILD)/%.o,$(SRC))
+ICON_PNG = data/icons/icon-task-manager.png
+ICON_SVG = data/icons/icon-task-manager.svg
+DESKTOP = data/com.edens.FileManager.desktop
+
+OBJ = $(patsubst src/%.c,$(BUILD)/%.o,$(SRC)) $(BUILD)/resources.o
 BIN = edens
 
-.PHONY: all clean run
+.PHONY: all clean run icon-png install-launcher
 
 all: $(BIN) compile_commands.json
+
+$(ICON_PNG): $(ICON_SVG)
+	convert -background none $< -type TrueColorAlpha PNG32:$@
+
+resources.c: gresources.xml $(ICON_PNG)
+	glib-compile-resources gresources.xml --generate-source --target=$@
+
+$(BUILD)/resources.o: resources.c
+	@mkdir -p $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BIN): $(OBJ)
 	$(CC) $(OBJ) -o $@ $(LDFLAGS)
@@ -39,5 +56,11 @@ compile_commands.json: $(SRC) Makefile
 run: $(BIN)
 	./$(BIN)
 
+install-launcher: $(BIN) $(ICON_PNG) $(DESKTOP)
+	install -Dm755 $(BIN) $(HOME)/.local/bin/edens
+	install -Dm644 $(DESKTOP) $(HOME)/.local/share/applications/com.edens.FileManager.desktop
+	install -Dm644 $(ICON_PNG) $(HOME)/.local/share/icons/hicolor/512x512/apps/com.edens.FileManager.png
+	gtk-update-icon-cache -f -t $(HOME)/.local/share/icons/hicolor 2>/dev/null || true
+
 clean:
-	rm -rf $(BUILD) $(BIN)
+	rm -rf $(BUILD) $(BIN) resources.c
