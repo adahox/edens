@@ -1,0 +1,4 @@
+CompileFlags:
+  Add:
+    - --query-driver=/usr/bin/gcc*
+  CompilationDatabase: .

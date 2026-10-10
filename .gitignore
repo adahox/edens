@@ -1,0 +1,4 @@
+/build/
+/edens
+compile_commands.json
+.cache/
